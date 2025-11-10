@@ -1,0 +1,37 @@
+{
+  "name": "github-activity-page",
+  "version": "1.0.0",
+  "description": "Github activity tracking system",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon",
+    "tsc": "tsc",
+    "start": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cairon29/Github-activity-page.git"
+  },
+  "keywords": [
+    "github",
+    "api"
+  ],
+  "author": "David Navarro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cairon29/Github-activity-page/issues"
+  },
+  "homepage": "https://github.com/Cairon29/Github-activity-page#readme",
+  "dependencies": {
+    "express": "5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.5",
+    "@types/node": "^24.10.0",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
