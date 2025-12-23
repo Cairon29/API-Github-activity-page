@@ -1,4 +1,14 @@
 import express, { type Request, type Response }  from 'express';
+import { Octokit } from 'octokit';
+import { api_router } from './modules/interface.ts';
+
+// @ts-ignore
+import cors from 'cors';
+
+const octokit = new Octokit({
+    auth: process.env.GITHUB_TOKEN
+})
+
 
 const app = express()
 
@@ -6,25 +16,43 @@ const PORT = 5555
 
 app.use(express.json())
 
-app.get("/", (req: Request, res: Response) => {
+app.use(api_router)
 
+app.use(cors({
+    origin: (
+        origin: string | undefined, 
+        callback: (
+            err: Error | null, 
+            allow?: boolean
+        ) => void) => {
+        const ACCEPTED_ORIGINS = [
+            'http://localhost:8080',
+            'http://localhost:1234',
+            'http://localhost:7890'
+        ];
+            // ↓ this is a way of validating if the origin is in the allowed list
+        if (origin && ACCEPTED_ORIGINS.indexOf(origin) !== -1) {
+            return callback(null, true)
+        }
+            // ↓ This is another way to validate
+        // if (ACCEPTED_ORIGINS.includes(origin)) {
+        //     return callback(null, true)
+        // }
+
+        if (!origin) {
+            return callback(null, true)
+        }
+      
+        return callback(new Error('Not allowed by CORS'))
+    }
+}))
+app.disable('x-powered-by')
+
+
+app.get("/", (req: Request, res: Response) => {
     res.json({ response: "here the response" });
 })
 
-app.get("/user/:name", async (req: Request, res: Response) => {
-    const { name } = req.params
-
-    const raw = await fetch(`https://api.github.com/users/${name}`)
-    const data = await raw.json()
-    console.log(data)
-    res.json(data)
-})
-
-app.get("/repos", async (req: Request, res: Response)  => {
-    const raw = await fetch('https://api.github.com/users/Cairon29/repos')
-    const data = await raw.json()
-    res.json(data)
-})
 
 app.listen(PORT, () => {
     console.log(`runn in port ${PORT} \n http://localhost:5555`);
