@@ -1,23 +1,14 @@
 import express, { type Request, type Response }  from 'express';
-import { Octokit } from 'octokit';
 import { api_router } from './modules/interface.ts';
-
 // @ts-ignore
 import cors from 'cors';
 
-const octokit = new Octokit({
-    auth: process.env.GITHUB_TOKEN
-})
-
-
 const app = express()
+const PORT = Number(process.env.PORT) || 5555
 
-const PORT = 5555
-
+app.disable('x-powered-by')
 app.use(express.json())
-
 app.use(api_router)
-
 app.use(cors({
     origin: (
         origin: string | undefined, 
@@ -46,14 +37,11 @@ app.use(cors({
         return callback(new Error('Not allowed by CORS'))
     }
 }))
-app.disable('x-powered-by')
-
 
 app.get("/", (req: Request, res: Response) => {
-    res.json({ response: "here the response" });
+    res.json({ response: "Github activity page 100% operational" });
 })
 
-
 app.listen(PORT, () => {
-    console.log(`runn in port ${PORT} \n http://localhost:5555`);
+    console.log(`URL project: http://localhost:${PORT}`);
 })

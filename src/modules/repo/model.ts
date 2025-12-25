@@ -16,7 +16,6 @@ export class RepoModel {
         }
         
         try {
-
             const data = await RepoModel.octokit.request(`GET /users/{username}/repos`, {
                 username: userName,
                 headers: {
