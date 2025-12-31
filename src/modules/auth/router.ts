@@ -3,4 +3,4 @@ import { AuthController } from './controller.ts'
 
 export const AuthRouter = Router()
 
-AuthRouter.post('/login', AuthController.login)
+AuthRouter.post('/signup', AuthController.signup)
