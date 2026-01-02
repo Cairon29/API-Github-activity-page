@@ -3,7 +3,7 @@ import { AuthModel } from "./model.ts"
 
 export class AuthController {
     static async signup(req: Request, res: Response) {
-        const { email, phone, github_username, fullname, supabase_id } = req.body
+        const { email, phone, github_username, fullname, supabase_id, profile_picture } = req.body
 
         if (!supabase_id) {
             res.status(400).json({ message: 'Supabase ID is required' })
@@ -15,7 +15,7 @@ export class AuthController {
             return
         }
 
-        const { data, status } =  await AuthModel.signup({ email, phone, github_username, fullname, supabase_id })
+        const { data, status } = await AuthModel.signup({ email, phone, github_username, fullname, supabase_id, profile_picture })
         res.json(data).status(status)
     }
 }
