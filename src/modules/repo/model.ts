@@ -14,7 +14,7 @@ export class RepoModel {
                 status: 400
             }
         }
-        
+
         try {
             const data = await RepoModel.octokit.request(`GET /users/{username}/repos`, {
                 username: userName,
@@ -25,7 +25,7 @@ export class RepoModel {
             console.log(data);
             if (!data) {
                 return {
-                    data: { error: 'Repositories not found'},
+                    data: { error: 'Repositories not found' },
                     status: 404
                 }
             }
@@ -37,7 +37,7 @@ export class RepoModel {
 
         } catch (error) {
             return {
-                data: { error: 'Error fetching the information'},
+                data: { error: 'Error fetching the information' },
                 status: 500
             }
         }

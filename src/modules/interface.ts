@@ -6,6 +6,6 @@ import { AuthRouter } from "./auth/router.ts";
 
 export const api_router = Router()
 
-api_router.use('/user', UserRouter)
+api_router.use('/users', UserRouter)
 api_router.use('/repo', RepoRouter)
 api_router.use('/auth', AuthRouter)
